@@ -11,7 +11,7 @@ public class MouseInteract : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, int.MaxValue, LayerMask.GetMask("Environment")))
             {
-                print("Interact");
+                print(hit.point);
                 selectUnit.TargetMove(hit.point);
             }
         }
