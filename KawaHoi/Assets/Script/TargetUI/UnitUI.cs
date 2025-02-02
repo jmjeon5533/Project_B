@@ -1,20 +1,21 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StaminaUI : TargetUI
+public class UnitUI : TargetUI
 {
-    Image image;
+    private Image image;
+    [SerializeField] private Image icon;
     protected override void Start()
     {
         base.Start();
         image = GetComponent<Image>();
+        icon.sprite = targetObject.icon;
     }
     protected override void Update()
     {
         base.Update();
-        var ratio = targetObject.curStamina / targetObject.maxStamina;
-        rect.sizeDelta = new Vector2(4 * Mathf.Lerp(0,targetObject.maxStamina,
-            ratio), 0.5f);
+        var ratio = Mathf.InverseLerp(0, targetObject.maxStamina, targetObject.curStamina);
+        rect.sizeDelta = new Vector2(80 * ratio, 3f);
         image.color = ratio >= targetObject.needStaminaRatio ? Color.green : Color.yellow;
     }
 }
