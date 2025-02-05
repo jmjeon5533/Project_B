@@ -6,6 +6,7 @@ public class MouseInteract : MonoBehaviour
     RaycastHit hit;
     void Update()
     {
+        if (!StageManager.instance.isGame) return;
         if (Input.GetMouseButtonUp(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

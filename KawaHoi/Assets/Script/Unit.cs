@@ -15,7 +15,7 @@ public class Unit : MonoBehaviour
     private bool tired;
     void Start()
     {
-        UIManager.instance.SetUIObject(this);
+        UIManager.instance.SetUIObject(this.gameObject,UIManager.UIState.unit);
         agent = GetComponent<NavMeshAgent>();
         curStamina = maxStamina;
         destination = transform.position;
@@ -32,7 +32,6 @@ public class Unit : MonoBehaviour
         }
         //목적지가 설정됬을 때
         var distance = Vector3.Distance(destination, transform.position);
-        print(distance);
         if (distance > 2)
         {
             if (curStamina > 0)

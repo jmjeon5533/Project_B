@@ -5,14 +5,19 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance { get; private set; }
     public Transform canvas;
-    public TargetUI staminaUIObj;
+    public TargetUI[] UIObj;
+    public enum UIState
+    {
+        unit,
+        structure
+    }
     private void Awake()
     {
         instance = this;
     }
-    public void SetUIObject(Unit snapObj)
+    public void SetUIObject(GameObject snapObj, UIState state)
     {
-        var ui = Instantiate(staminaUIObj, canvas).GetComponent<TargetUI>();
+        var ui = Instantiate(UIObj[(int)state], canvas).GetComponent<TargetUI>();
         ui.targetObject = snapObj;
     }
 }

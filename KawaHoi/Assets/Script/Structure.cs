@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class Structure : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public Sprite icon;
+    public enum StructState
+    {
+        myStruct,
+        enemy,
+        normal,
+        random
+    }
+    public StructState state;
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        UIManager.instance.SetUIObject(this.gameObject, UIManager.UIState.structure);
     }
 }
