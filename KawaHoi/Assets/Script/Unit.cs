@@ -5,6 +5,7 @@ using UnityEngine.AI;
 public class Unit : MonoBehaviour
 {
     private NavMeshAgent agent;
+    private LineRenderer lineRenderer;
     Vector3 destination;
     public float maxStamina;
     public float curStamina;
@@ -19,8 +20,23 @@ public class Unit : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         curStamina = maxStamina;
         destination = transform.position;
+
+        if (lineRenderer == null)
+        {
+            lineRenderer = gameObject.AddComponent<LineRenderer>();
+            lineRenderer.startWidth = 0.2f;
+            lineRenderer.endWidth = 0.2f;
+            lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+            lineRenderer.startColor = Color.green;
+            lineRenderer.endColor = Color.green;
+        }
     }
     private void Update()
+    {
+        MoveObj();
+        DrawPath();
+    }
+    void MoveObj()
     {
         var ratio = Mathf.InverseLerp(0, maxStamina, curStamina);
         //¸ØÃçÀÖÀ» ¶§
@@ -36,15 +52,31 @@ public class Unit : MonoBehaviour
         {
             if (curStamina > 0)
             {
-                if(!tired)
-                agent.SetDestination(destination);
+                if (!tired)
+                {
+                    agent.SetDestination(destination);
+                    agent.isStopped = false;
+                }
             }
             else
             {
-                agent.SetDestination(transform.position);
+                agent.isStopped = true;
                 tired = true;
             }
             if (agent.velocity.magnitude >= 2) curStamina -= 2 * Time.deltaTime;
+        }
+    }
+    void DrawPath()
+    {
+        if (agent.hasPath)
+        {
+            NavMeshPath path = agent.path;
+            lineRenderer.positionCount = path.corners.Length;
+            lineRenderer.SetPositions(path.corners);
+        }
+        else
+        {
+            lineRenderer.positionCount = 0;
         }
     }
     public virtual void TargetMove(Vector3 targetPos, Structure structure = null)

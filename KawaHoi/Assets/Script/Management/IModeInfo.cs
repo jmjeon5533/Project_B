@@ -20,11 +20,13 @@ public class GameMode : IModeInfo
     }
     IEnumerator ReadyGameCountDown()
     {
-        for(int i = 3; i > 0; i--)
+        var s = StageManager.instance;
+        for (int i = 3; i > 0; i--)
         {
-            Debug.Log(i);
+            s.gameStartCountText.text = i.ToString();
             yield return new WaitForSeconds(1f);
         }
+        s.gameStartCountText.text = "";
         StageManager.instance.isGame = true;
     }
 }

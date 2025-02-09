@@ -18,6 +18,8 @@ public class StageManager : MonoBehaviour
     [Tooltip("준비 단계 UI 활성화/비활성화를 위한 오브젝트 parent")]
     public GameObject setupUIParent;
     public Button gameStartButton;
+    [Space(10)]
+    public Text gameStartCountText;
     void Awake()
     {
         instance = this;

@@ -4,7 +4,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance { get; private set; }
-    public Transform canvas;
+    public Transform ObjUIParent;
     public TargetUI[] UIObj;
     public enum UIState
     {
@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour
     }
     public void SetUIObject(GameObject snapObj, UIState state)
     {
-        var ui = Instantiate(UIObj[(int)state], canvas).GetComponent<TargetUI>();
+        var ui = Instantiate(UIObj[(int)state], ObjUIParent).GetComponent<TargetUI>();
         ui.targetObject = snapObj;
     }
 }
