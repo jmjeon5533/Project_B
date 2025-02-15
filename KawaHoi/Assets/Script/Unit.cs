@@ -26,7 +26,8 @@ public class Unit : MonoBehaviour
             lineRenderer = gameObject.AddComponent<LineRenderer>();
             lineRenderer.startWidth = 0.2f;
             lineRenderer.endWidth = 0.2f;
-            lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+            lineRenderer.sharedMaterial = Resources.Load<Material>("Material/AlwaysVisible");
+            lineRenderer.sharedMaterial.SetColor("_EmissionColor", Color.white * 5.0f);
             lineRenderer.startColor = Color.green;
             lineRenderer.endColor = Color.green;
         }
