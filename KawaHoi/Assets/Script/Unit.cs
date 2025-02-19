@@ -7,6 +7,9 @@ public class Unit : MonoBehaviour
     private NavMeshAgent agent;
     private LineRenderer lineRenderer;
     Vector3 destination;
+    public float maxHP;
+    public float curHP;
+    [Space(10)]
     public float maxStamina;
     public float curStamina;
     [Range(0, 1)]
@@ -16,9 +19,11 @@ public class Unit : MonoBehaviour
     private bool tired;
     void Start()
     {
+        StageManager.instance.AddCurUnit(this);
         UIManager.instance.SetUIObject(this.gameObject,UIManager.UIState.unit);
         agent = GetComponent<NavMeshAgent>();
         curStamina = maxStamina;
+        curHP = maxHP;
         destination = transform.position;
 
         if (lineRenderer == null)

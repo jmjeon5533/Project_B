@@ -12,6 +12,7 @@ public class GameMode : IModeInfo
     {
         var s = StageManager.instance;
         s.setupUIParent.SetActive(false);
+        s.gameUIParent.SetActive(true);
         s.StartCoroutine(ReadyGameCountDown());
     }
     public void Loop()
@@ -42,6 +43,7 @@ public class PrepareMode : IModeInfo
             s.InitMode(s.modes.gameMode);
         });
         s.setupUIParent.SetActive(true);
+        s.gameUIParent.SetActive(false);
     }
     public void Loop()
     {

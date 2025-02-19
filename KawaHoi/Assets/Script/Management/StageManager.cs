@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,14 +10,19 @@ public class StageManager : MonoBehaviour
     public bool isGame;
 
     [Header("게임 관련")]
+    public Unit selectUnit;
     [Tooltip("직접적인 게임에 들어갈 맵 오브젝트 프리팹")]
     public MapData Map;
     [Tooltip("생성된 맵 오브젝트")]
     public MapData curMap;
     public Sprite[] structIcons;
-    [Header("UI 관련")]
+    [Tooltip("현재 생성된 Unit")]
+    [SerializeField]
+    private List<Unit> curUnits = new List<Unit>();
+    [Header("준비 단계 UI 관련")]
     [Tooltip("준비 단계 UI 활성화/비활성화를 위한 오브젝트 parent")]
     public GameObject setupUIParent;
+    public GameObject gameUIParent;
     public Button gameStartButton;
     [Space(10)]
     public Text gameStartCountText;
@@ -54,5 +60,10 @@ public class StageManager : MonoBehaviour
         modes.curMode = mode;
         modes.Init();
         var isGame = mode == modes.gameMode;
+    }
+    public void AddCurUnit(Unit unit)
+    {
+        curUnits.Add(unit);
+        UIManager.instance.AddUnitPanel(unit);
     }
 }

@@ -3,7 +3,6 @@ using UnityEngine.EventSystems;
 
 public class MouseInteract : MonoBehaviour
 {
-    public Unit selectUnit;
     RaycastHit hit;
     int layerMask;
     private void Start()
@@ -12,6 +11,7 @@ public class MouseInteract : MonoBehaviour
     }
     void Update()
     {
+        var s = StageManager.instance;
         if (!StageManager.instance.isGame) return;
         if (Input.GetMouseButtonUp(0))
         {
@@ -25,12 +25,12 @@ public class MouseInteract : MonoBehaviour
 
                 switch (hitLayer)
                 {
-                    case int _ when hitLayer == LayerMask.NameToLayer("Environment") && selectUnit != null:
+                    case int _ when hitLayer == LayerMask.NameToLayer("Environment") && s.selectUnit != null:
                         // 환경을 클릭했을 때 이동
-                        selectUnit = null;
+                        s.selectUnit = null;
                         break;
                     case int _ when hitLayer == LayerMask.NameToLayer("Unit"):
-                        selectUnit = hitObject.GetComponent<Unit>();
+                        s.selectUnit = hitObject.GetComponent<Unit>();
                         break;
                 }
             }
@@ -47,9 +47,9 @@ public class MouseInteract : MonoBehaviour
 
                 switch (hitLayer)
                 {
-                    case int _ when hitLayer == LayerMask.NameToLayer("Environment") && selectUnit != null:
+                    case int _ when hitLayer == LayerMask.NameToLayer("Environment") && s.selectUnit != null:
                         // 환경을 클릭했을 때 이동
-                        selectUnit.TargetMove(hit.point);
+                        s.selectUnit.TargetMove(hit.point);
                         break;
                 }
 
