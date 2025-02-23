@@ -9,6 +9,7 @@ public class UnitUI : TargetUI
     protected override void Start()
     {
         targetUnit = targetObject.GetComponent<Unit>();
+        targetUnit.unitUI = this;
         base.Start();
         image = GetComponent<Image>();
         icon.sprite = targetUnit.icon;

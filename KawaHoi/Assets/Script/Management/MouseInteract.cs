@@ -7,7 +7,7 @@ public class MouseInteract : MonoBehaviour
     int layerMask;
     private void Start()
     {
-        layerMask = LayerMask.GetMask("Environment", "Unit");
+        layerMask = LayerMask.GetMask("Environment", "Unit", "Structure");
     }
     void Update()
     {
@@ -26,7 +26,6 @@ public class MouseInteract : MonoBehaviour
                 switch (hitLayer)
                 {
                     case int _ when hitLayer == LayerMask.NameToLayer("Environment") && s.selectUnit != null:
-                        // 환경을 클릭했을 때 이동
                         s.selectUnit = null;
                         break;
                     case int _ when hitLayer == LayerMask.NameToLayer("Unit"):
@@ -40,20 +39,38 @@ public class MouseInteract : MonoBehaviour
             if (EventSystem.current.IsPointerOverGameObject()) return;
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Debug.DrawRay(ray.origin, ray.direction * 1000, Color.red, 2f);
+
             if (Physics.Raycast(ray, out hit, int.MaxValue, layerMask))
             {
                 GameObject hitObject = hit.collider.gameObject;
                 int hitLayer = hitObject.layer;
+                var select = s.selectUnit;
 
                 switch (hitLayer)
                 {
-                    case int _ when hitLayer == LayerMask.NameToLayer("Environment") && s.selectUnit != null:
-                        // 환경을 클릭했을 때 이동
-                        s.selectUnit.TargetMove(hit.point);
+                    case int _ when hitLayer == LayerMask.NameToLayer("Environment") && select != null:
+                        if (select.isEnterStructure)
+                        {
+                            select.isEnterStructure = false;
+                            select.structTarget.enterUnits.Remove(select);
+                            select.gameObject.SetActive(true);
+                            select.unitUI.gameObject.SetActive(true);
+                            select.structTarget = null;
+                        }
+                        select.TargetMove(hit.point);
+                        print("environment");
                         break;
+                    case int _ when hitLayer == LayerMask.NameToLayer("Structure") && select != null:
+                        print("Struct");
+                        select.structTarget = hitObject.GetComponent<Structure>();
+                        select.TargetMove(hit.point);
+                        break;
+
                 }
 
             }
         }
+        
     }
 }

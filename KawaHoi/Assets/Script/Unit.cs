@@ -6,7 +6,10 @@ public class Unit : MonoBehaviour
 {
     private NavMeshAgent agent;
     private LineRenderer lineRenderer;
+    [HideInInspector] public UnitUI unitUI;
     Vector3 destination;
+    public Structure structTarget;
+
     public float maxHP;
     public float curHP;
     [Space(10)]
@@ -14,13 +17,15 @@ public class Unit : MonoBehaviour
     public float curStamina;
     [Range(0, 1)]
     public float needStaminaRatio;
-    [SerializeField] float recovStaminaValue;
+    [SerializeField] private float recovStaminaValue;
+
     public Sprite icon;
     private bool tired;
+    public bool isEnterStructure;
     void Start()
     {
         StageManager.instance.AddCurUnit(this);
-        UIManager.instance.SetUIObject(this.gameObject,UIManager.UIState.unit);
+        UIManager.instance.SetUIObject(this.gameObject, UIManager.UIState.unit);
         agent = GetComponent<NavMeshAgent>();
         curStamina = maxStamina;
         curHP = maxHP;
@@ -41,6 +46,7 @@ public class Unit : MonoBehaviour
     {
         MoveObj();
         DrawPath();
+        EnterStructure();
     }
     void MoveObj()
     {
@@ -85,6 +91,22 @@ public class Unit : MonoBehaviour
             lineRenderer.positionCount = 0;
         }
     }
+    void EnterStructure()
+    {
+        if (structTarget != null)
+        {
+            var dis = Vector3.Distance(structTarget.transform.position, transform.position);
+            print(dis);
+            if (dis <= 7)
+            {
+                isEnterStructure = true;
+                structTarget.enterUnits.Add(this);
+                gameObject.SetActive(false);
+                unitUI.gameObject.SetActive(false);
+            }
+        }
+    }
+
     public virtual void TargetMove(Vector3 targetPos, Structure structure = null)
     {
         destination = targetPos;

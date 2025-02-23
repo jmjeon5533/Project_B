@@ -46,7 +46,9 @@ public class StageManager : MonoBehaviour
         {
             for (int j = 0; j < bases[i].Length; j++)
             {
-                var s = bases[i][j].AddComponent<Structure>();
+                var b = bases[i][j];
+                b.layer = LayerMask.NameToLayer("Structure");
+                var s = b.AddComponent<Structure>();
                 s.icon = structIcons[i];
             }
         }
