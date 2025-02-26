@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class MouseInteract : MonoBehaviour
@@ -12,7 +12,7 @@ public class MouseInteract : MonoBehaviour
     void Update()
     {
         var s = StageManager.instance;
-        if (!StageManager.instance.isGame) return;
+        if (!s.isGame) return;
         if (Input.GetMouseButtonUp(0))
         {
             if (EventSystem.current.IsPointerOverGameObject()) return;
@@ -53,7 +53,7 @@ public class MouseInteract : MonoBehaviour
                         if (select.isEnterStructure)
                         {
                             select.isEnterStructure = false;
-                            select.structTarget.enterUnits.Remove(select);
+                            select.structTarget.RemoveUnit(select);
                             select.gameObject.SetActive(true);
                             select.unitUI.gameObject.SetActive(true);
                             select.structTarget = null;

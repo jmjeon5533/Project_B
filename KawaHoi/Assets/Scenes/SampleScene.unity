@@ -399,6 +399,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b6a9ce55bf688408a00e3304153fbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitUI: {fileID: 0}
+  structTarget: {fileID: 0}
   maxHP: 100
   curHP: 0
   maxStamina: 20
@@ -406,6 +408,7 @@ MonoBehaviour:
   needStaminaRatio: 0.5
   recovStaminaValue: 5
   icon: {fileID: 21300000, guid: 20767f8417439dc45a146f5593eeba16, type: 3}
+  isEnterStructure: 0
 --- !u!195 &216168026
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -872,6 +875,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b6a9ce55bf688408a00e3304153fbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitUI: {fileID: 0}
+  structTarget: {fileID: 0}
   maxHP: 100
   curHP: 0
   maxStamina: 20
@@ -879,6 +884,7 @@ MonoBehaviour:
   needStaminaRatio: 0.5
   recovStaminaValue: 5
   icon: {fileID: 21300000, guid: 2f3aef8f5ed011b4baf73ce8654ee43c, type: 3}
+  isEnterStructure: 0
 --- !u!195 &608087519
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2971,6 +2977,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b6a9ce55bf688408a00e3304153fbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitUI: {fileID: 0}
+  structTarget: {fileID: 0}
   maxHP: 100
   curHP: 0
   maxStamina: 20
@@ -2978,6 +2986,7 @@ MonoBehaviour:
   needStaminaRatio: 0.5
   recovStaminaValue: 5
   icon: {fileID: 21300000, guid: 26b4ed7eeda0c644caf6181fa62c0d4d, type: 3}
+  isEnterStructure: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

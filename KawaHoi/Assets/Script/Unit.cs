@@ -96,11 +96,10 @@ public class Unit : MonoBehaviour
         if (structTarget != null)
         {
             var dis = Vector3.Distance(structTarget.transform.position, transform.position);
-            print(dis);
             if (dis <= 7)
             {
                 isEnterStructure = true;
-                structTarget.enterUnits.Add(this);
+                structTarget.AddUnit(this);
                 gameObject.SetActive(false);
                 unitUI.gameObject.SetActive(false);
             }
