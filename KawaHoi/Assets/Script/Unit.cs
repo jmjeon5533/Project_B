@@ -22,10 +22,8 @@ public class Unit : MonoBehaviour
     public Sprite icon;
     private bool tired;
     public bool isEnterStructure;
-    void Start()
+    protected virtual void Start()
     {
-        StageManager.instance.AddCurUnit(this);
-        UIManager.instance.SetUIObject(this.gameObject, UIManager.UIState.unit);
         agent = GetComponent<NavMeshAgent>();
         curStamina = maxStamina;
         curHP = maxHP;

@@ -8,16 +8,23 @@ public interface IModeInfo
 }
 public class GameMode : IModeInfo
 {
+    int curEnemyCount = 0;
     public void Init()
     {
         var s = StageManager.instance;
         s.setupUIParent.SetActive(false);
         s.gameUIParent.SetActive(true);
         s.StartCoroutine(ReadyGameCountDown());
+
     }
     public void Loop()
     {
-
+        var s = StageManager.instance;
+        if (s.isGame)
+        {
+            s.gameTimer += Time.deltaTime;
+            if (curEnemyCount < s.curMap.enemyBase.Length) SummonEnemy();
+        }
     }
     IEnumerator ReadyGameCountDown()
     {
@@ -29,6 +36,18 @@ public class GameMode : IModeInfo
         }
         s.gameStartCountText.text = "";
         StageManager.instance.isGame = true;
+    }
+    private void SummonEnemy()
+    {
+        var s = StageManager.instance;
+
+        while (s.gameTimer >= s.curMap.enemyBase[curEnemyCount].summonTime)
+        {
+            var data = s.curMap.enemyBase[curEnemyCount];
+            s.SummonEnemy(data.summonPrefab, data.summonBase);
+            curEnemyCount++;
+            Debug.Log($"{curEnemyCount} : {s.curMap.enemyBase.Length}");
+        }
     }
 }
 public class PrepareMode : IModeInfo

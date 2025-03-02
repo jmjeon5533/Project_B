@@ -10,6 +10,7 @@ public class StageManager : MonoBehaviour
     public bool isGame;
 
     [Header("게임 관련")]
+    public float gameTimer;
     public Unit selectUnit;
     [Tooltip("직접적인 게임에 들어갈 맵 오브젝트 프리팹")]
     public MapData Map;
@@ -34,14 +35,14 @@ public class StageManager : MonoBehaviour
     }
     private void Start()
     {
-        curMap = Instantiate(Map,Vector3.zero,Quaternion.identity);
+        curMap = Instantiate(Map, Vector3.zero, Quaternion.identity);
         MapSetting();
         modes.Init();
     }
     private void MapSetting()
     {
         var map = curMap;
-        GameObject[][] bases = { map.myBase, map.enemyBase, map.normalBase, map.randomBase };
+        GameObject[][] bases = { map.myBase, map.normalBase, map.randomBase };
         for (int i = 0; i < bases.Length; i++)
         {
             for (int j = 0; j < bases[i].Length; j++)
@@ -51,6 +52,13 @@ public class StageManager : MonoBehaviour
                 var s = b.AddComponent<Structure>();
                 s.icon = structIcons[i];
             }
+        }
+        for (int i = 0; i < map.enemyBase.Length; i++)
+        {
+            var b = map.enemyBase[i].summonBase.gameObject;
+            b.layer = LayerMask.NameToLayer("Structure");
+            var s = b.AddComponent<Structure>();
+            s.icon = structIcons[3];
         }
     }
     void Update()
@@ -67,5 +75,9 @@ public class StageManager : MonoBehaviour
     {
         curUnits.Add(unit);
         UIManager.instance.AddUnitPanel(unit);
+    }
+    public void SummonEnemy(GameObject Obj, Transform target)
+    {
+        Instantiate(Obj, target.position, Quaternion.identity);
     }
 }

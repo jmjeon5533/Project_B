@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
         instance = this;
     }
     public void SetUIObject(GameObject snapObj, UIState state)
-    {
+    { 
         var ui = Instantiate(UIObj[(int)state], ObjUIParent).GetComponent<TargetUI>();
         ui.targetObject = snapObj;
     }
