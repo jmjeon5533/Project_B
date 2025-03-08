@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,6 +23,10 @@ public class Unit : MonoBehaviour
     public Sprite icon;
     private bool tired;
     public bool isEnterStructure;
+
+
+    Vector3 pos;
+
     protected virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -106,6 +111,28 @@ public class Unit : MonoBehaviour
 
     public virtual void TargetMove(Vector3 targetPos, Structure structure = null)
     {
-        destination = targetPos;
+        Vector3 navMeshPosition;
+
+        if (FindClosestNavMeshPosition(targetPos, out navMeshPosition))
+        {
+            destination = navMeshPosition;
+            pos = navMeshPosition;
+        }
+    }
+    bool FindClosestNavMeshPosition(Vector3 target, out Vector3 result)
+    {
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(target, out hit, 2.0f, NavMesh.AllAreas)) // ¹Ý°æ 2 À¯´Ö ³»¿¡¼­ Å½»ö
+        {
+            result = hit.position;
+            return true;
+        }
+        result = target;
+        return false;
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(pos, 0.5f);
     }
 }

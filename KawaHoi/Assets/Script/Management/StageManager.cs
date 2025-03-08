@@ -9,19 +9,19 @@ public class StageManager : MonoBehaviour
     public Mode modes;
     public bool isGame;
 
-    [Header("°ÔÀÓ °ü·Ã")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")]
     public float gameTimer;
     public Unit selectUnit;
-    [Tooltip("Á÷Á¢ÀûÀÎ °ÔÀÓ¿¡ µé¾î°¥ ¸Ê ¿ÀºêÁ§Æ® ÇÁ¸®ÆÕ")]
+    [Tooltip("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ó¿ï¿½ ï¿½ï¿½î°¥ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public MapData Map;
-    [Tooltip("»ý¼ºµÈ ¸Ê ¿ÀºêÁ§Æ®")]
+    [Tooltip("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®")]
     public MapData curMap;
     public Sprite[] structIcons;
-    [Tooltip("ÇöÀç »ý¼ºµÈ Unit")]
+    [Tooltip("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Unit")]
     [SerializeField]
     private List<Unit> curUnits = new List<Unit>();
-    [Header("ÁØºñ ´Ü°è UI °ü·Ã")]
-    [Tooltip("ÁØºñ ´Ü°è UI È°¼ºÈ­/ºñÈ°¼ºÈ­¸¦ À§ÇÑ ¿ÀºêÁ§Æ® parent")]
+    [Header("ï¿½Øºï¿½ ï¿½Ü°ï¿½ UI ï¿½ï¿½ï¿½ï¿½")]
+    [Tooltip("ï¿½Øºï¿½ ï¿½Ü°ï¿½ UI È°ï¿½ï¿½È­/ï¿½ï¿½È°ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® parent")]
     public GameObject setupUIParent;
     public GameObject gameUIParent;
     public Button gameStartButton;
